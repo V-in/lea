@@ -2,50 +2,29 @@
 #include <string.h>
 //#include <stdlib.h>
 
-/*
-Posição da função qant_x_preco() alterada pois a função 
- q20() precisa saber que ela existe
-*/
-
-
-void qant_x_preco(float preco, int* total)
+float qant_x_preco(float preco, float* ptr)
 {
-    int quantidade = 0;
+    int quantidade;
 
     printf("Diga a quantidade de produtos: \n");
     scanf("%i", &quantidade);
-    printf("%i", quantidade);
-
-    printf("preco é: %f \n", preco);
-    printf("total parcial: %f \n \n", *total);
-    printf("endereço de total: %d", &total); //aqui aparece um endereço
-
-    *total = *total + ((float)quantidade * preco);//essa equação não está funcionando
-
-    printf("preco é: %f \n", preco);
-    printf("total parcial: %f \n \n", *total);
-    printf("endereço de total: %d", &total);//aqui aparece outro totalmente diferente
-
-
+    *ptr = *ptr + (quantidade * preco);
+    printf("Total: %f \n",*ptr);
 }
 
-void q20(int* contrl) //mudança no nome da variavel
+void q20(int* controle)
 {
     static float total = 0;
 	char codigoproduto[4];
 	float preco;
-
-	pergunta:
+    pergunta:
 	printf("Digite o código do produto: \n");
 	scanf("%s", &codigoproduto);
-
-	printf("%s \n", codigoproduto);
 
 	if (strcmp(codigoproduto,"1001") == 0)
 	{
 		printf("Produto numero 1001 \n");
 		preco = 5.32;
-		printf("%i", &total);
 		qant_x_preco(preco, &total);
 
 	}
@@ -80,19 +59,19 @@ void q20(int* contrl) //mudança no nome da variavel
     }
     else if(strcmp(codigoproduto, "1234") == 0)
     {
-        printf("O valor total é: \n");
-        printf("%3.2f \n", total);
-        printf("endereço de total: %d", &total);
-
-        *contrl = 0;
+        printf("O valor total e: \n");
+        printf("%3.2f", total);
+        int* controlePTR = controle;
+        *controlePTR = 0;
     }
     else
     {
-        printf("Código Errado. \n");
+        printf("Código Errado");
         goto pergunta;
     }
 
 }
+
 
 
 int main ()
@@ -103,7 +82,7 @@ int main ()
 
 	do{
         q20(&var);
-	}while(var); //esse while precisa de ; interessante!
+	}while(var);
 
 }
 
