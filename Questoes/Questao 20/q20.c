@@ -2,17 +2,24 @@
 #include <string.h>
 //#include <stdlib.h>
 
+float qant_x_preco(float preco, float* ptr)
+{
+    int quantidade;
+
+    printf("Diga a quantidade de produtos: \n");
+    scanf("%i", &quantidade);
+    *ptr = *ptr + (quantidade * preco);
+    printf("Total: %f \n",*ptr);
+}
+
 void q20(int* controle)
 {
     static float total = 0;
 	char codigoproduto[4];
 	float preco;
-
-	pergunta:
+    pergunta:
 	printf("Digite o código do produto: \n");
 	scanf("%s", &codigoproduto);
-
-	printf("%s \n", codigoproduto);
 
 	if (strcmp(codigoproduto,"1001") == 0)
 	{
@@ -53,8 +60,9 @@ void q20(int* controle)
     else if(strcmp(codigoproduto, "1234") == 0)
     {
         printf("O valor total e: \n");
-        printf("%3.2f", total)
-        *controle = 0;
+        printf("%3.2f", total);
+        int* controlePTR = controle;
+        *controlePTR = 0;
     }
     else
     {
@@ -64,15 +72,6 @@ void q20(int* controle)
 
 }
 
-float qant_x_preco(float preco, int* total)
-{
-    int quantiddade;
-
-    printf("Diga a quantidade de produtos: \n");
-    scanf("%i", quantidade);
-    *total = *total + (quantidade * preco);
-
-}
 
 
 int main ()
@@ -83,7 +82,7 @@ int main ()
 
 	do{
         q20(&var);
-	}while(var)
+	}while(var);
 
 }
 
